@@ -34,7 +34,9 @@ set softtabstop=2
 set expandtab
 
 set complete+=k "dictionary autocomplete
+
 set number "view line numbers
+highlight LineNr ctermfg=grey
 
 set listchars=tab:▸▸,trail:~ "nicer whitespace chars
 set list "show whitespace
