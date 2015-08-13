@@ -12,6 +12,7 @@ Plugin 'SuperTab'
 Plugin 'Syntastic'
 Plugin 'The-NERD-tree'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'editorconfig-vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
