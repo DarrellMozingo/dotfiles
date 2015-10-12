@@ -11,7 +11,6 @@ Plugin 'jshint.vim'
 Plugin 'SuperTab'
 Plugin 'Syntastic'
 Plugin 'The-NERD-tree'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'editorconfig-vim'
 
 call vundle#end()            " required
