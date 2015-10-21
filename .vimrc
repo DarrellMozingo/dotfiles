@@ -39,7 +39,6 @@ highlight LineNr ctermfg=grey
 
 set listchars=tab:▸▸,trail:~ "nicer whitespace chars
 set list "show whitespace
-set mouse=nv "allow mouse
 
 "skip backup & swap files
 set nobackup
