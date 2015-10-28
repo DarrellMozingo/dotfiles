@@ -89,6 +89,7 @@ export NVM_DIR="/home/darrell/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias rdesktop='rdesktop -g 1024x768 -5 -K -r clipboard:CLIPBOARD'
+export EDITOR=vim
 
 keychain \
   ~/.ssh/github \
