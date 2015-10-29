@@ -89,6 +89,8 @@ export NVM_DIR="/home/darrell/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 alias rdesktop='rdesktop -g 1024x768 -5 -K -r clipboard:CLIPBOARD'
+alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m SimpleHTTPServer 1337'
+
 export EDITOR=vim
 
 keychain \
