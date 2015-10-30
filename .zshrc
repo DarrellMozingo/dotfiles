@@ -97,4 +97,5 @@ keychain \
   ~/.ssh/github \
   ~/.ssh/content-dev \
   ~/.ssh/content_disco \
-  ~/.ssh/teamcity-chef
+  ~/.ssh/teamcity-chef \
+  ~/.ssh/7d_servers
