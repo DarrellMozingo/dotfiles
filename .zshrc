@@ -98,4 +98,5 @@ keychain \
   ~/.ssh/content-dev \
   ~/.ssh/content_disco \
   ~/.ssh/teamcity-chef \
-  ~/.ssh/7d_servers
+  ~/.ssh/7d_servers \
+  ~/.ssh/ofc-build00-gitosis
