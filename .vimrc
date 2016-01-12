@@ -56,6 +56,3 @@ set secure "disallow dangerous commands in per folder configs
 
 "close vim if only nerdtree is open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-"use local pylint rc file for syntastic
-let g:syntastic_python_pylint_args = '--rcfile=.pylintrc'
