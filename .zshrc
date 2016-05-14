@@ -90,6 +90,7 @@ export NVM_DIR="/home/darrell/.nvm"
 
 alias rdesktop='rdesktop -g 1024x768 -5 -K -r clipboard:CLIPBOARD'
 alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m SimpleHTTPServer 1337'
+alias kp='kpcli ~/Dropbox/Finances/NewKeyStore.kdb'
 
 export EDITOR=vim
 
