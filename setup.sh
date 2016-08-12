@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get update \
-  && sudo apt-get install -y git curl vim tmux zsh
+  && sudo apt-get install -y curl vim tmux zsh
   
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
