@@ -82,18 +82,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-export NVM_DIR="/home/darrell/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 alias rdesktop='rdesktop -g 1024x768 -5 -K -r clipboard:CLIPBOARD'
 alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m SimpleHTTPServer 1337'
-alias kp='kpcli --kdb ~/Dropbox/Finances/NewKeyStore.kdb'
+alias kp='kpcli --kdb ~/Dropbox/Finances/Passwords.kdbx'
 
 export EDITOR=vim
-
-keychain \
-  ~/.ssh/github \
-  ~/.ssh/ofc-build00-gitosis
