@@ -2,6 +2,9 @@
 
 sudo apt-get update \
   && sudo apt-get install -y git curl vim tmux zsh
+  
+git config --global user.name "Darrell Mozingo"
+git config --global user.email "darrell@mozingo.net"
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -sv ~/.dotfiles/.vimrc ~
