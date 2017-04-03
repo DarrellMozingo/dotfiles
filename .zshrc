@@ -87,3 +87,5 @@ alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m S
 alias kp='kpcli --kdb ~/Dropbox/Finances/Passwords.kdbx'
 
 export EDITOR=vim
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
