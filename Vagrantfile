@@ -1,8 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Prereq: `cp -R ~/.ssh .`
-
 Vagrant.configure('2') do |config|
   config.vm.box = 'debian/jessie64'
   config.vm.network 'public_network'
