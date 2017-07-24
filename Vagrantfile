@@ -58,6 +58,9 @@ Vagrant.configure('2') do |config|
     git clone https://github.com/rbenv/ruby-build.git /home/vagrant/.rbenv/plugins/ruby-build
     apt-get install -y libssl-dev libreadline-dev zlib1g-dev
 
+    # Node
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+
     echo "Commands to run:"
     echo "\taws configure --profile developer"
   SHELL
