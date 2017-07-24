@@ -44,6 +44,8 @@ Vagrant.configure('2') do |config|
     python get-pip.py && rm get-pip.py
     pip install awscli
     pip install cookiecutter
+    pip install virtualenv
+    pip install --upgrade setuptools
 
     # Java
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
@@ -60,6 +62,8 @@ Vagrant.configure('2') do |config|
 
     # Node
     curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+    nvm install 6
+    npm install -g gulp-cli@1.1.0
 
     echo "Commands to run:"
     echo "\taws configure --profile developer"
