@@ -46,7 +46,6 @@ Vagrant.configure('2') do |config|
 
     sudo -u vagrant bash -c '
       curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
-      pyenv install 3.6.2
     '
 
     curl -O https://bootstrap.pypa.io/get-pip.py
