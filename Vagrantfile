@@ -40,12 +40,20 @@ Vagrant.configure('2') do |config|
     chmod +x /usr/local/bin/docker-compose
 
     # Python
+    sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+    libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+    xz-utils tk-dev
+
+    sudo -u vagrant bash -c '
+      curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+      pyenv install 3.6.2
+    '
+
     curl -O https://bootstrap.pypa.io/get-pip.py
     python get-pip.py && rm get-pip.py
     pip install awscli
     pip install cookiecutter
     pip install virtualenv
-    pip install --upgrade setuptools
 
     # Java
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" >> /etc/apt/sources.list.d/webupd8team-java.list
@@ -58,12 +66,12 @@ Vagrant.configure('2') do |config|
     # Ruby
     git clone https://github.com/rbenv/rbenv.git /home/vagrant/.rbenv
     git clone https://github.com/rbenv/ruby-build.git /home/vagrant/.rbenv/plugins/ruby-build
+    chown -R vagrant:vagrant /home/vagrant/.rbenv
     apt-get install -y libssl-dev libreadline-dev zlib1g-dev
 
     # Node
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
-    nvm install 6
-    npm install -g gulp-cli@1.1.0
+    git clone https://github.com/creationix/nvm.git /home/vagrant/.nvm
+    chown -R vagrant:vagrant /home/vagrant/.nvm
 
     echo "Commands to run:"
     echo "\taws configure --profile developer"
