@@ -97,3 +97,8 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+TRAPINT() { # display character when canceling commands, like bash does
+  print -n "^C"
+    return $(( 128 + $1 ))
+}
