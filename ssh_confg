@@ -1,0 +1,7 @@
+# For a cheap multi-host keyring on Windows
+# Move to ~/.ssh/config
+
+Host github.com
+  IdentityFile ~/.ssh/github
+
+# repeat for other hosts...
