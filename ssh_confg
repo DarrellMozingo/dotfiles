@@ -2,6 +2,9 @@
 # Move to ~/.ssh/config
 
 Host github.com
+  User git
   IdentityFile ~/.ssh/github
 
-# repeat for other hosts...
+Host git.internal.local
+  User git
+  IdentityFile ~/.ssh/git.internal
