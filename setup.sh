@@ -13,5 +13,7 @@ vim +PluginInstall
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 rm -f ~/.zshrc
 ln -sv ~/.dotfiles/.zshrc ~
+ln -sv ~/.dotfiles/.work-commands.zshrc ~
+git update-index --assume-unchanged ~/.dotfiles/.work-commands.zshrc # don't track future changes
 
 ln -sv ~/.dotfiles/.tmux.conf ~

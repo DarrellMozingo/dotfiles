@@ -102,3 +102,6 @@ TRAPINT() { # display character when canceling commands, like bash does
   print -n "^C"
     return $(( 128 + $1 ))
 }
+
+# Add work specific commands
+. ~/.work-commands.zshrc
