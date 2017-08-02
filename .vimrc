@@ -33,6 +33,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+" auto reload changes
+set autoread
+
 set complete+=k "dictionary autocomplete
 
 set number "view line numbers
