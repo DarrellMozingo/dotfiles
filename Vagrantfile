@@ -62,6 +62,10 @@ Vagrant.configure('2') do |config|
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
     apt-get install -y oracle-java8-installer oracle-java8-set-default
 
+    sudo -u vagrant bash -c '
+      curl -s "https://get.sdkman.io" | bash
+    '
+
     # Ruby
     git clone https://github.com/rbenv/rbenv.git /home/vagrant/.rbenv
     git clone https://github.com/rbenv/ruby-build.git /home/vagrant/.rbenv/plugins/ruby-build
