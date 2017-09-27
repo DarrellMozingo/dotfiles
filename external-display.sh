@@ -1,15 +1,18 @@
 #!/bin/bash
 
+laptop_screen="eDP-1-1"
+
+left_screen="DP-1-2"
+left_state_file="/sys/class/drm/card1-DP-2/status"
+left_prev_state="initial"
+
+right_screen="HDMI-1-1"
+right_state_file="/sys/class/drm/card1-HDMI-A-1/status"
+right_prev_state="initial"
+
 function handle_mode_change {
-  laptop_screen="eDP-1-1"
-
-  left_screen="DP-1-2"
-  left_prev_state="initial"
-  left_curr_state=$(cat /sys/class/drm/card1-DP-2/status)
-
-  right_screen="HDMI-1-1"
-  right_prev_state="initial"
-  right_curr_state=$(cat /sys/class/drm/card1-HDMI-A-1/status)
+  left_curr_state=$(cat $left_state_file)
+  right_curr_state=$(cat $right_state_file)
 
   if [ $left_prev_state = $left_curr_state ] && [ $right_prev_state = $right_curr_state ]; then
     return
