@@ -46,3 +46,5 @@ eval "$(pyenv virtualenv-init -)"
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export OPSCODE_USER=dmozingo
