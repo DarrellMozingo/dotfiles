@@ -1,3 +1,5 @@
+# Speed debugging tips: http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+
 export ZSH=~/.oh-my-zsh
 
 # Look in ~/.oh-my-zsh/themes/
@@ -18,7 +20,7 @@ plugins=(git)
 
 TRAPINT() { # display character when canceling commands, like bash does
   print -n "^C"
-    return $(( 128 + $1 ))
+  return $(( 128 + $1 ))
 }
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
@@ -47,9 +49,6 @@ precmd() { # equivalent of bash PROMPT_COMMAND
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(command rbenv init -)"
 
-export NVM_DIR="$HOME/.nvm"
-source "$NVM_DIR/nvm.sh"
-
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(command pyenv init -)"
 eval "$(command pyenv virtualenv-init -)"
@@ -57,3 +56,20 @@ eval "$(command pyenv virtualenv-init -)"
 export SDKMAN_DIR="$HOME/.sdkman"
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# Defer initialization of nvm until nvm, node or a node-dependent command is
+# run. Ensure this block is only run once if .zshrc gets sourced multiple times
+# by checking whether __init_nvm is a function. Original init code that's slow:
+#    export NVM_DIR="$HOME/.nvm"
+#    source "$NVM_DIR/nvm.sh"
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
