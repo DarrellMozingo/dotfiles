@@ -47,14 +47,14 @@ precmd() { # equivalent of bash PROMPT_COMMAND
 }
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(command rbenv init -)"
+[ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(command pyenv init -)"
-eval "$(command pyenv virtualenv-init -)"
+[ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)"
+[ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
 
 export SDKMAN_DIR="$HOME/.sdkman"
-source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -d "$HOME/.sdkman" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once if .zshrc gets sourced multiple times
