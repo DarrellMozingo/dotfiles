@@ -39,8 +39,15 @@ alias kp='kpcli --kdb ~/Dropbox/Finances/Passwords.kdbx'
 # Change prompt if AWS session is available
 original_prompt=$PS1
 precmd() { # equivalent of bash PROMPT_COMMAND
-  if [ "$AWS_SESSION_TOKEN" ]; then
-    PS1="(aws-session) $original_prompt"
+  if [ "$AWS_PROFILE" ]; then
+    if [ "$AWS_PROFILE" = "default" ]; then
+      profile="sandbox"
+    else
+      # split on '-' and take the second part (ie 'assume-project')
+      profile="PROD:${AWS_PROFILE[(ws:-:)2]}"
+    fi
+
+    PS1="(aws:$profile) $original_prompt"
   else
     PS1=$original_prompt
   fi
