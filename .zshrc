@@ -41,7 +41,7 @@ original_prompt=$PS1
 precmd() { # equivalent of bash PROMPT_COMMAND
   if [ "$AWS_PROFILE" ]; then
     login_time=$(date -d "$(ls -l ~/.aws/aws_profile | awk '{print $6 " " $7 " " $8 }')" +%s)
-    expiration_length="1 hour"
+    expiration_length="12 hour"
     expiration_time=$(date -d "now - $expiration_length" +%s)
 
     expired=""
