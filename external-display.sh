@@ -24,11 +24,11 @@ function handle_mode_change {
   echo "Left screen ($left_screen): $left_curr_state; Right screen ($right_screen): $right_curr_state"
 
   if [ $left_curr_state = connected ] && [ $right_curr_state = connected ]; then
-    /usr/bin/xrandr --output $laptop_screen --off --output $left_screen --auto --left-of $right_screen --output $right_screen --auto
+    /usr/bin/xrandr --output $laptop_screen --auto --primary --below $right_screen --output $left_screen --auto --left-of $right_screen --output $right_screen --auto
   elif [ $left_curr_state = connected ] && [ $right_curr_state = disconnected ]; then
-    /usr/bin/xrandr --output $laptop_screen --off --output $left_screen --auto --output $right_screen --off
+    /usr/bin/xrandr --output $laptop_screen --auto --primary --below $left_screen --output $left_screen --auto --output $right_screen --off
   elif [ $left_curr_state = disconnected ] && [ $right_curr_state = connected ]; then
-    /usr/bin/xrandr --output $laptop_screen --off --output $left_screen --off --output $right_screen --auto
+    /usr/bin/xrandr --output $laptop_screen --auto --primary --below $right_screen --output $left_screen --off --output $right_screen --auto
   else
     /usr/bin/xrandr --auto
   fi
