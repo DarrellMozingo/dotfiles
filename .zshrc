@@ -91,7 +91,7 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
 fi
 
 # LinuxBrew exports: http://linuxbrew.sh
-if [ -d "~/.linuxbrew" ]; then
+if [ -d "$HOME/.linuxbrew" ]; then
   export PATH="$HOME/.linuxbrew/bin:$PATH"
   export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
   export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
