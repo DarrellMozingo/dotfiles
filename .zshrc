@@ -32,6 +32,9 @@ source $ZSH/oh-my-zsh.sh
 work_specific_commands=~/.work-commands.zshrc
 [ -s $work_specific_commands ] && source $work_specific_commands
 
+aws_completer=/usr/local/bin/aws_zsh_completer.sh
+[ -s $aws_completer ] && source $aws_completer
+
 alias rdesktop='rdesktop -g 1024x768 -5 -K -r clipboard:CLIPBOARD'
 alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m SimpleHTTPServer 1337'
 alias kp='kpcli --kdb ~/Dropbox/Finances/Passwords.kdbx'
