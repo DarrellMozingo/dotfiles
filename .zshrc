@@ -65,6 +65,13 @@ precmd() { # equivalent of bash PROMPT_COMMAND
   fi
 }
 
+# LinuxBrew exports: http://linuxbrew.sh
+if [ -d "$HOME/.linuxbrew" ]; then
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+fi
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
 
@@ -93,9 +100,3 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
 
-# LinuxBrew exports: http://linuxbrew.sh
-if [ -d "$HOME/.linuxbrew" ]; then
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-fi
