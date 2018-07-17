@@ -43,23 +43,7 @@ alias kp='kpcli --kdb ~/Dropbox/Finances/Passwords.kdbx'
 original_prompt=$PS1
 precmd() { # equivalent of bash PROMPT_COMMAND
   if [ "$AWS_PROFILE" ]; then
-    login_time=$(date -d "$(ls -l ~/.aws/aws_profile | awk '{print $6 " " $7 " " $8 }')" +%s)
-    expiration_length="12 hour"
-    expiration_time=$(date -d "now - $expiration_length" +%s)
-
-    expired=""
-    if [ $login_time -lt $expiration_time ]; then
-      expired=" - TOKEN EXPIRED"
-    fi
-
-    if [ "$AWS_PROFILE" = "default" ]; then
-      profile="sandbox"
-    else
-      # split on '-' and take the second part (ie 'assume-project')
-      profile="PROD:${AWS_PROFILE[(ws:-:)2]}"
-    fi
-
-    PS1="(aws:$profile$expired) $original_prompt"
+    PS1="(aws) $original_prompt"
   else
     PS1=$original_prompt
   fi
