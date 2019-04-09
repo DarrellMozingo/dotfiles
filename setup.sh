@@ -22,5 +22,6 @@ ln -sv ~/.dotfiles/.work-commands.zshrc ~
 git update-index --assume-unchanged ~/.dotfiles/.work-commands.zshrc # don't track future changes
 
 ln -sv ~/.dotfiles/.tmux.conf ~
+ln -sv ~/.dotfiles/.xsessionrc ~
 
 echo "Get p4merge from http://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools"
