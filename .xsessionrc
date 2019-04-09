@@ -1,3 +1,3 @@
 #!/bin/bash
 
-xrandr -d :0 --output eDP-1-1 --auto
+sleep 2 && xrandr -d :0 --output eDP-1-1 --auto
