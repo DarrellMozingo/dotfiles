@@ -69,8 +69,7 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
 
-export SDKMAN_DIR="$HOME/.sdkman"
-[ -d "$HOME/.sdkman" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
 
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once if .zshrc gets sourced multiple times
@@ -89,3 +88,4 @@ if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(whence -w __init_nvm)" = function ]; the
   }
   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
 fi
+
