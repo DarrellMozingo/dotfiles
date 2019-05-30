@@ -4,7 +4,7 @@ sudo xcodebuild -license
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-brew install wget git htop tmux zsh
+brew install wget git htop tmux zsh vim
 
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
