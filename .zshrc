@@ -69,7 +69,15 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
 
-[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
+# Jabba (Java version management)
+if [ -s "$HOME/.jabba/jabba.sh" ]; then
+  source "$HOME/.jabba/jabba.sh"
+
+  function __jabba_on_cd() {
+    [[ -f "./.jabbarc" ]] && echo "\n☕️⚡️ Setting Jabba JDK from .jabbarc in $PWD: $(cat .jabbarc | tr -d "\n")" && jabba use
+  }
+  chpwd_functions=(${chpwd_functions[@]} "__jabba_on_cd")
+fi
 
 # Defer initialization of nvm until nvm, node or a node-dependent command is
 # run. Ensure this block is only run once if .zshrc gets sourced multiple times
