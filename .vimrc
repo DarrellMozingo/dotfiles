@@ -49,6 +49,7 @@ set list "show whitespace
 set nobackup
 set nowritebackup
 set noswapfile
+set nomodeline
 
 "toggle nerdtree via F2
 :nmap <F2> :NERDTreeToggle<CR>
