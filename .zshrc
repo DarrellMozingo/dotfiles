@@ -56,12 +56,6 @@ precmd() { # equivalent of bash PROMPT_COMMAND
   PS1=${tags}${original_prompt}
 }
 
-# LinuxBrew exports: http://linuxbrew.sh
-if [ -d "$HOME/.linuxbrew" ]; then
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
-  export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-  export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-fi
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
