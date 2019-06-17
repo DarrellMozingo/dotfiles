@@ -5,6 +5,7 @@ sudo xcodebuild -license
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install wget git htop tmux zsh vim
+brew cask install p4v
 
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
@@ -25,5 +26,3 @@ ln -sv ~/.dotfiles/.work-commands.zshrc ~
 git update-index --assume-unchanged ~/.dotfiles/.work-commands.zshrc # don't track future changes
 
 ln -sv ~/.dotfiles/.tmux.conf ~
-
-echo "Get p4merge from http://www.perforce.com/product/components/perforce-visual-merge-and-diff-tools"
