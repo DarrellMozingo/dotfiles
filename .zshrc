@@ -56,8 +56,17 @@ precmd() { # equivalent of bash PROMPT_COMMAND
   PS1=${tags}${original_prompt}
 }
 
-# Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
-PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+#### mac shite:
+  # Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
+  PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+
+  # For compilers to find zlib (for eg `pyenv install`):
+  export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib"
+  export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
+
+  # For pkg-config to find zlib (for eg `pyenv install`):
+  export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
+####
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
