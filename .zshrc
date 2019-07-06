@@ -85,6 +85,9 @@ if [ -s "$HOME/.jabba/jabba.sh" ]; then
     [[ -f "./.jabbarc" ]] && echo "\n☕️⚡️ Setting Jabba JDK from .jabbarc in $PWD: $(cat .jabbarc | tr -d "\n")" && jabba use
   }
   chpwd_functions=(${chpwd_functions[@]} "__jabba_on_cd")
+
+  # If the shell loads in a .jabbarc folder
+  [[ -f "./.jabbarc" ]] && __jabba_on_cd
 fi
 
 # Node version manager
@@ -96,6 +99,9 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
     [[ -f "./.nvmrc" ]] && nvm use
   }
   chpwd_functions=(${chpwd_functions[@]} "__nvmrc_on_cd")
+
+  # If the shell loads in an .nvmrc folder
+  [[ -f "./.nvmrc" ]] && __nvmrc_on_cd
 fi
 
 # NVM is pretty slow to load. This defers it until needed, but ran into problems integrating w/above cd change
