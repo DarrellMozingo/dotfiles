@@ -68,14 +68,16 @@ precmd() { # equivalent of bash PROMPT_COMMAND
   export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 ####
 
+# Ruby version manager
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
 
+# Python version manager
 export PATH="$HOME/.pyenv/bin:$PATH"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
 
-# Jabba (Java version management)
+# Java version management
 if [ -s "$HOME/.jabba/jabba.sh" ]; then
   source "$HOME/.jabba/jabba.sh"
 
@@ -85,6 +87,7 @@ if [ -s "$HOME/.jabba/jabba.sh" ]; then
   chpwd_functions=(${chpwd_functions[@]} "__jabba_on_cd")
 fi
 
+# Node version manager
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
   export NVM_DIR="$HOME/.nvm"
   source "$NVM_DIR/nvm.sh"
