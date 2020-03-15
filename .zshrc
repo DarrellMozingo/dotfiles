@@ -35,7 +35,7 @@ work_specific_commands=~/.work-commands.zshrc
 aws_completer=/usr/local/bin/aws_zsh_completer.sh
 [ -s $aws_completer ] && source $aws_completer
 
-alias http-here='echo http://$(hostname -I | cut -d" " -f 1):1337 && python -m SimpleHTTPServer 1337'
+alias http-here='echo http://$(hostname):1337 && python -m http.server 1337'
 
 # `--no-run-if-empty` needed on xargs for Linux (defaults to that on Mac?)
 alias git-clean='git fetch && git branch --merged | grep -v master | xargs git branch -d && git remote prune origin'
