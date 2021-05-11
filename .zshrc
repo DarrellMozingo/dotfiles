@@ -94,9 +94,12 @@ if [ -s "$HOME/.jabba/jabba.sh" ]; then
 fi
 
 # Node version manager
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  source "$NVM_DIR/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+
+NVM_SCRIPT="$(brew --prefix nvm)/nvm.sh"  # Linux: NVM_SCRIPT="$NVM_DIR/nvm.sh"
+
+if [ -s $NVM_SCRIPT ]; then
+  source $NVM_SCRIPT
 
   function __nvmrc_on_cd() {
     [[ -f "./.nvmrc" ]] && nvm use
