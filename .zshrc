@@ -23,7 +23,7 @@ TRAPINT() { # display character when canceling commands, like bash does
   return $(( 128 + $1 ))
 }
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/go/bin"
 export EDITOR=vim
 export OPSCODE_USER=dmozingo
 
