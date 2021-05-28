@@ -5,7 +5,7 @@ sudo xcodebuild -license
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install wget git htop tmux zsh vim
-brew cask install p4v
+brew install --cask p4v
 
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
