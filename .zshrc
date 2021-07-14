@@ -28,11 +28,16 @@ export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
 
-work_specific_commands=~/.work-commands.zshrc
-[ -s $work_specific_commands ] && source $work_specific_commands
+extra_includes=(
+  "$HOME/.work-commands.zshrc"
+  "/usr/local/bin/aws_zsh_completer.sh"
+  "$HOME/.google-cloud-sdk/path.zsh.inc"
+  "$HOME/.google-cloud-sdk/completion.zsh.inc"
+)
 
-aws_completer=/usr/local/bin/aws_zsh_completer.sh
-[ -s $aws_completer ] && source $aws_completer
+for include in "${extra_includes[@]}"; do
+  [ -s $include ] && source $include
+done
 
 alias http-here='echo http://$(hostname):1337 && python -m http.server 1337'
 
@@ -105,8 +110,4 @@ if which fnm > /dev/null; then
   chpwd_functions=(${chpwd_functions[@]} "__fnm_on_cd")
   [[ -f "./.nvmrc" ]] && __fnm_on_cd
 fi
-
-# Google Cloud SDK
-if [ -f '$HOME/.google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/.google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '$HOME/.google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/.google-cloud-sdk/completion.zsh.inc'; fi
 
