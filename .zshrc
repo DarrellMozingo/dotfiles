@@ -105,9 +105,8 @@ if which fnm > /dev/null; then
   eval "$(fnm env)"
 
   function __fnm_on_cd() {
-    fnm use
+    [[ -f "./.nvmrc" ]] && fnm use
   }
   chpwd_functions=(${chpwd_functions[@]} "__fnm_on_cd")
-  [[ -f "./.nvmrc" ]] && __fnm_on_cd
+  __fnm_on_cd
 fi
-
