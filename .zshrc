@@ -23,7 +23,7 @@ TRAPINT() { # display character when canceling commands, like bash does
   return $(( 128 + $1 ))
 }
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/go/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 export EDITOR=vim
 export OPSCODE_USER=dmozingo
 
@@ -58,6 +58,9 @@ precmd() { # equivalent of bash PROMPT_COMMAND
 
   PS1=${tags}${original_prompt}
 }
+
+# golang tooling
+export PATH="$PATH:/usr/local/go/bin"
 
 #### mac shite:
   # Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
