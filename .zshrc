@@ -30,7 +30,7 @@ export OPSCODE_USER=dmozingo
 source $ZSH/oh-my-zsh.sh
 
 # Add .NET Core SDK tools
-export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$HOME/.dotnet/tools:/usr/local/share/dotnet"
 
 work_specific_commands=~/.work-commands.zshrc
 [ -s $work_specific_commands ] && source $work_specific_commands
