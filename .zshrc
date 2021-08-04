@@ -42,7 +42,7 @@ done
 alias http-here='echo http://$(hostname):1337 && python -m http.server 1337'
 
 # `--no-run-if-empty` needed on xargs for Linux (defaults to that on Mac?)
-alias git-clean='git fetch && git branch --merged | grep -v master | xargs git branch -d && git remote prune origin'
+alias git-clean='git fetch && git branch --merged | grep -Ev "master|main|develop|stable" | xargs git branch -d && git remote prune origin'
 
 # Tag prompt with various activated tools
 original_prompt=$PS1
