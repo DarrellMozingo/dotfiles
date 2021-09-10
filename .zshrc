@@ -110,3 +110,7 @@ if which fnm > /dev/null; then
   chpwd_functions=(${chpwd_functions[@]} "__fnm_on_cd")
   __fnm_on_cd
 fi
+
+# Kubectl autocomplete
+[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+
