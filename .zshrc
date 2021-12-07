@@ -49,7 +49,7 @@ original_prompt=$PS1
 precmd() { # equivalent of bash PROMPT_COMMAND
   tags=""
 
-  if [ "$AWS_PROFILE" ]; then
+  if [ "$AWS_SESSION_TOKEN" ]; then
     tags="(aws) $tags"
   fi
 
