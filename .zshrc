@@ -66,6 +66,9 @@ export PATH="$PATH:$HOME/.dotnet/tools:/usr/local/share/dotnet"
 # golang tooling
 export PATH="$PATH:/usr/local/go/bin"
 
+# rust tooling
+export PATH="$PATH:$HOME/.cargo/bin"
+
 #### mac shite:
   # Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
   PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
