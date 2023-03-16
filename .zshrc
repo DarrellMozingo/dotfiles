@@ -114,3 +114,6 @@ fi
 # Kubectl autocomplete
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
