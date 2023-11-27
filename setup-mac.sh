@@ -2,11 +2,15 @@
 
 # Install Brew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/darrell/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Common tools
-brew install wget git htop tmux zsh vim editorconfig
+# Install:
+## Common tools
+brew install wget git git-gui htop tmux zsh vim editorconfig jq
+## Specific tools
+brew install derailed/k9s/k9s
+## Language bits
+brew install fnm pyenv
 brew install --cask p4v
 
 # Git config
