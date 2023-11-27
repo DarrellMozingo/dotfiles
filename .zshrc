@@ -70,6 +70,9 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
 #### mac shite:
+  brew=/opt/homebrew/bin/brew
+  [ -f "$brew" ] && eval "$($brew shellenv)"
+
   # Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
   PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
 
@@ -103,7 +106,7 @@ if [ -s "$HOME/.jabba/jabba.sh" ]; then
   [[ -f "./.jabbarc" ]] && __jabba_on_cd
 fi
 
-# Node version manager
+# Node version manager, installed via HomeBrew
 if which fnm > /dev/null; then
   eval "$(fnm env)"
 
