@@ -12,7 +12,7 @@ Plugin 'jshint.vim'
 Plugin 'SuperTab'
 Plugin 'Syntastic'
 Plugin 'The-NERD-tree'
-Plugin 'editorconfig-vim'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mileszs/ack.vim'
 
 call vundle#end()            " required
