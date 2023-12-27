@@ -41,6 +41,9 @@ done
 
 alias http-here='echo http://$(hostname):1337 && python -m http.server 1337'
 
+# https://aria2.github.io
+alias torrent='aria2c'
+
 # `--no-run-if-empty` needed on xargs for Linux (defaults to that on Mac?)
 alias git-clean='git fetch && git branch --merged | grep -Ev "master|main|develop|stable" | xargs git branch -d && git remote prune origin'
 
