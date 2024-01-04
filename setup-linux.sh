@@ -5,6 +5,7 @@ sudo apt-get update \
 
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
+git config --global commit.gpgsign true
 
 git config --global merge.tool p4merge
 git config --global mergetool.p4merge.cmd 'p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'

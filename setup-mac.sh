@@ -17,6 +17,7 @@ brew install --cask p4v
 git config --global user.name "Darrell Mozingo"
 git config --global user.email "darrell@mozingo.net"
 git config --global init.defaultBranch main
+git config --global commit.gpgsign true
 
 git config --global merge.tool p4merge
 git config --global mergetool.p4merge.path /Applications/p4merge.app/Contents/MacOS/p4merge
