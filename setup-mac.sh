@@ -26,7 +26,7 @@ git config --global mergetool.keepBackup false
 
 # Vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -Fsv ~/.dotfiles/.vimrc ~
+ln -sv ~/.dotfiles/.vimrc ~
 vim +PluginInstall
 
 # Zsh setup
