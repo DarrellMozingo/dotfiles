@@ -126,3 +126,15 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/darrell/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/darrell/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/darrell/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/darrell/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/darrell/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
