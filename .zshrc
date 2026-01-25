@@ -93,7 +93,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Python version manager
 export PATH="$HOME/.pyenv/bin:$PATH"
-[ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)"
+[ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)" && eval "$(command pyenv init --path)"
 [ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
 
 # Java version management
