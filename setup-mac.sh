@@ -10,7 +10,7 @@ brew install wget git git-gui htop tmux zsh vim editorconfig jq
 ## Specific tools
 brew install derailed/k9s/k9s
 ## Language bits
-brew install fnm pyenv
+brew install fnm pyenv pyenv-virtualenv
 brew install --cask p4v
 
 # Git config
