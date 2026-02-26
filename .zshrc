@@ -16,7 +16,8 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# Plugins disabled for faster startup - git aliases defined manually below
+plugins=()
 
 TRAPINT() { # display character when canceling commands, like bash does
   print -n "^C"
@@ -28,16 +29,28 @@ export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
 
-extra_includes=(
-  "$HOME/.work-commands.zshrc"
-  "/usr/local/bin/aws_zsh_completer.sh"
-  "$HOME/.google-cloud-sdk/path.zsh.inc"
-  "$HOME/.google-cloud-sdk/completion.zsh.inc"
-)
+# Load work commands immediately (assumed to be lightweight)
+[ -s "$HOME/.work-commands.zshrc" ] && source "$HOME/.work-commands.zshrc"
 
-for include in "${extra_includes[@]}"; do
-  [ -s $include ] && source $include
-done
+# Google Cloud SDK - load paths immediately, defer completions
+[ -s "$HOME/.google-cloud-sdk/path.zsh.inc" ] && source "$HOME/.google-cloud-sdk/path.zsh.inc"
+
+# Lazy load expensive completions
+if [ -s "/usr/local/bin/aws_zsh_completer.sh" ]; then
+  aws() {
+    unfunction aws
+    source "/usr/local/bin/aws_zsh_completer.sh"
+    aws "$@"
+  }
+fi
+
+if [ -s "$HOME/.google-cloud-sdk/completion.zsh.inc" ]; then
+  gcloud() {
+    unfunction gcloud
+    source "$HOME/.google-cloud-sdk/completion.zsh.inc"
+    gcloud "$@"
+  }
+fi
 
 alias http-here='echo http://$(hostname):1337 && python -m http.server 1337'
 
@@ -73,8 +86,13 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
 #### mac shite:
-  brew=/opt/homebrew/bin/brew
-  [ -f "$brew" ] && eval "$($brew shellenv)"
+  # Homebrew paths - set manually to avoid expensive 'brew shellenv' on every startup
+  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+  export HOMEBREW_REPOSITORY="/opt/homebrew"
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+  export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 
   # Export gmake (from `brew install make`) as make on mac (so it's newer than 3.8.1, supporting .ONESHELL)
   PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
@@ -87,22 +105,16 @@ export PATH="$PATH:$HOME/.cargo/bin"
   export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 ####
 
-# Ruby version manager - lazy loaded
-export PATH="$HOME/.rbenv/bin:$PATH"
-if [ -d "$HOME/.rbenv" ]; then
-  rbenv() {
-    unfunction rbenv
-    eval "$(command rbenv init -)"
-    rbenv "$@"
-  }
-fi
-
-# Python version manager
+# Python version manager - lazy loaded
 export PATH="$HOME/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv" ]; then
-  eval "$(command pyenv init --path)"
-  eval "$(command pyenv init -)"
-  eval "$(command pyenv virtualenv-init -)"
+  pyenv() {
+    unfunction pyenv
+    eval "$(command pyenv init --path)"
+    eval "$(command pyenv init -)"
+    eval "$(command pyenv virtualenv-init -)"
+    pyenv "$@"
+  }
 fi
 
 # Java version management
@@ -121,9 +133,32 @@ if [ -s "$HOME/.jabba/jabba.sh" ]; then
   [[ -f "./.jabbarc" ]] && __jabba_on_cd
 fi
 
-# Node version manager, installed via HomeBrew
-if command -v fnm > /dev/null; then
-  eval "$(fnm env --use-on-cd)"
+# Node version manager - lazy loaded
+export PATH="$HOME/.local/share/fnm:$PATH"
+if command -v fnm > /dev/null 2>&1; then
+  fnm() {
+    unfunction fnm
+    eval "$(command fnm env --use-on-cd)"
+    fnm "$@"
+  }
+
+  node() {
+    unfunction fnm node npm npx
+    eval "$(command fnm env --use-on-cd)"
+    node "$@"
+  }
+
+  npm() {
+    unfunction fnm node npm npx
+    eval "$(command fnm env --use-on-cd)"
+    npm "$@"
+  }
+
+  npx() {
+    unfunction fnm node npm npx
+    eval "$(command fnm env --use-on-cd)"
+    npx "$@"
+  }
 fi
 
 # Kubectl autocomplete - lazy loaded for faster startup
@@ -146,11 +181,15 @@ fpath=(/Users/darrell/.docker/completions $fpath)
 
 # Optimized compinit - only regenerate dump once per day
 autoload -Uz compinit
-if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]; then
+setopt EXTENDEDGLOB
+for dump in ${HOME}/.zcompdump(#qN.mh+24); do
   compinit
-else
-  compinit -C
-fi
+  if [[ -s "$dump" && (! -s "${dump}.zwc" || "$dump" -nt "${dump}.zwc") ]]; then
+    zcompile "$dump"
+  fi
+done
+unsetopt EXTENDEDGLOB
+compinit -C
 # End of Docker CLI completions
 
 # Added by Antigravity
