@@ -87,54 +87,71 @@ export PATH="$PATH:$HOME/.cargo/bin"
   export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 ####
 
-# Ruby version manager
+# Ruby version manager - lazy loaded
 export PATH="$HOME/.rbenv/bin:$PATH"
-[ -d "$HOME/.rbenv" ] && eval "$(command rbenv init -)"
+if [ -d "$HOME/.rbenv" ]; then
+  rbenv() {
+    unfunction rbenv
+    eval "$(command rbenv init -)"
+    rbenv "$@"
+  }
+fi
 
 # Python version manager
 export PATH="$HOME/.pyenv/bin:$PATH"
-[ -d "$HOME/.pyenv" ] && eval "$(command pyenv init -)" && eval "$(command pyenv init --path)"
-[ -d "$HOME/.pyenv" ] && eval "$(command pyenv virtualenv-init -)"
+if [ -d "$HOME/.pyenv" ]; then
+  eval "$(command pyenv init --path)"
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
+fi
 
 # Java version management
 if [ -s "$HOME/.jabba/jabba.sh" ]; then
   source "$HOME/.jabba/jabba.sh"
 
   function __jabba_on_cd() {
-    [[ -f "./.jabbarc" ]] && echo "\n☕️⚡️ Setting Jabba JDK from .jabbarc in $PWD: $(cat .jabbarc | tr -d "\n")" && jabba use
+    if [[ -f "./.jabbarc" ]]; then
+      echo "\n☕️⚡️ Setting Jabba JDK from .jabbarc in $PWD: $(cat .jabbarc)"
+      jabba use
+    fi
   }
-  chpwd_functions=(${chpwd_functions[@]} "__jabba_on_cd")
+  chpwd_functions+=(__jabba_on_cd)
 
   # If the shell loads in a .jabbarc folder
   [[ -f "./.jabbarc" ]] && __jabba_on_cd
 fi
 
 # Node version manager, installed via HomeBrew
-if which fnm > /dev/null; then
-  eval "$(fnm env)"
-
-  function __fnm_on_cd() {
-    [[ -f "./.nvmrc" ]] && fnm use
-  }
-  chpwd_functions=(${chpwd_functions[@]} "__fnm_on_cd")
-  __fnm_on_cd
+if command -v fnm > /dev/null; then
+  eval "$(fnm env --use-on-cd)"
 fi
 
-# Kubectl autocomplete
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+# Kubectl autocomplete - lazy loaded for faster startup
+if [[ $commands[kubectl] ]]; then
+  kubectl() {
+    unfunction kubectl
+    source <(command kubectl completion zsh)
+    kubectl "$@"
+  }
+fi
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/darrell/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/darrell/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/darrell/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/darrell/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+# Google Cloud SDK already loaded via extra_includes array above (lines 34-35)
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/darrell/.docker/completions $fpath)
+
+# Optimized compinit - only regenerate dump once per day
 autoload -Uz compinit
-compinit
+if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 # End of Docker CLI completions
+
+# Added by Antigravity
+export PATH="/Users/darrell/.antigravity/antigravity/bin:$PATH"
