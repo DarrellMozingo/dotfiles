@@ -108,13 +108,17 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # Python version manager - lazy loaded
 export PATH="$HOME/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv" ]; then
-  pyenv() {
-    unfunction pyenv
+  _init_pyenv() {
+    unfunction pyenv python python3 pip pip3 2>/dev/null
     eval "$(command pyenv init --path)"
     eval "$(command pyenv init -)"
     eval "$(command pyenv virtualenv-init -)"
-    pyenv "$@"
   }
+  pyenv()   { _init_pyenv; pyenv "$@"; }
+  python()  { _init_pyenv; python "$@"; }
+  python3() { _init_pyenv; python3 "$@"; }
+  pip()     { _init_pyenv; pip "$@"; }
+  pip3()    { _init_pyenv; pip3 "$@"; }
 fi
 
 # Java version management
@@ -174,8 +178,6 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-# Google Cloud SDK already loaded via extra_includes array above (lines 34-35)
-
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/darrell/.docker/completions $fpath)
 
@@ -192,5 +194,3 @@ unsetopt EXTENDEDGLOB
 compinit -C
 # End of Docker CLI completions
 
-# Added by Antigravity
-export PATH="/Users/darrell/.antigravity/antigravity/bin:$PATH"
