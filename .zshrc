@@ -105,20 +105,12 @@ export PATH="$PATH:$HOME/.cargo/bin"
   export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
 ####
 
-# Python version manager - lazy loaded
+# Python version manager
 export PATH="$HOME/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv" ]; then
-  _init_pyenv() {
-    unfunction pyenv python python3 pip pip3 2>/dev/null
-    eval "$(command pyenv init --path)"
-    eval "$(command pyenv init -)"
-    eval "$(command pyenv virtualenv-init -)"
-  }
-  pyenv()   { _init_pyenv; pyenv "$@"; }
-  python()  { _init_pyenv; python "$@"; }
-  python3() { _init_pyenv; python3 "$@"; }
-  pip()     { _init_pyenv; pip "$@"; }
-  pip3()    { _init_pyenv; pip3 "$@"; }
+  eval "$(command pyenv init --path)"
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
 fi
 
 # Java version management
