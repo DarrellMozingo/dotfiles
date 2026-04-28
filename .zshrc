@@ -25,6 +25,7 @@ TRAPINT() { # display character when canceling commands, like bash does
 }
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+export PATH="$HOME/go/bin:$PATH"
 export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
