@@ -26,6 +26,7 @@ TRAPINT() { # display character when canceling commands, like bash does
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
@@ -109,6 +110,10 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # Python version manager
 export PATH="$HOME/.pyenv/bin:$PATH"
 if [ -d "$HOME/.pyenv" ]; then
+  # Clean up stale rehash lock if no rehash is actually running
+  if [ -e "$HOME/.pyenv/shims/.pyenv-shim" ] && ! pgrep -f pyenv-rehash >/dev/null; then
+    rm -f "$HOME/.pyenv/shims/.pyenv-shim"
+  fi
   eval "$(command pyenv init --path)"
   eval "$(command pyenv init -)"
   eval "$(command pyenv virtualenv-init -)"
