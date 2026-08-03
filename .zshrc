@@ -31,9 +31,6 @@ export EDITOR=vim
 
 source $ZSH/oh-my-zsh.sh
 
-# Load work commands immediately (assumed to be lightweight)
-[ -s "$HOME/.work-commands.zshrc" ] && source "$HOME/.work-commands.zshrc"
-
 # Google Cloud SDK - load paths immediately, defer completions
 [ -s "$HOME/.google-cloud-sdk/path.zsh.inc" ] && source "$HOME/.google-cloud-sdk/path.zsh.inc"
 
@@ -172,14 +169,11 @@ if [[ $commands[kubectl] ]]; then
   }
 fi
 
-
+# Fuzzy search, if installed
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+# Docker CLI completions
 fpath=(/Users/darrell/.docker/completions $fpath)
-
-# Optimized compinit - only regenerate dump once per day
 autoload -Uz compinit
 setopt EXTENDEDGLOB
 for dump in ${HOME}/.zcompdump(#qN.mh+24); do
@@ -190,5 +184,7 @@ for dump in ${HOME}/.zcompdump(#qN.mh+24); do
 done
 unsetopt EXTENDEDGLOB
 compinit -C
-# End of Docker CLI completions
+
+# Load work-specific commands
+[ -s "$HOME/.work-commands.zshrc" ] && source "$HOME/.work-commands.zshrc"
 
